@@ -9,5 +9,10 @@
 #import "Randomizer.h"
 
 @implementation Randomizer
+- ( NSArray *) createRandomPath:(CGRect)outerRect  innerRect:(CGRect) innerRect{
+    NSMutableArray *pathCoordinates = [[NSMutableArray alloc] init];
+    // TODO: create random path
+    return pathCoordinates;
+}
 
 @end
