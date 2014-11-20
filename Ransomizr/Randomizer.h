@@ -11,6 +11,14 @@
 
 @interface Randomizer : NSObject
 
+/*!
+ Creates an 8 point random path that travels between the area between outerRect and innerRect
+ 
+ @param outerRect the outer area
+ @param innerRect the inner area
+ 
+ @return array with 8 CGPoints
+ */
 - ( NSArray *) createRandomPath:(CGSize)outerRect  innerRect:(CGSize) innerRect;
 /*!
  Gets a random font available on the system of a random size constrained
@@ -40,4 +48,5 @@
  */
 - (BOOL)randomBoolWithPercentage:(CGFloat)percentage;
 
+- (UIColor *) getRandomUIColor;
 @end

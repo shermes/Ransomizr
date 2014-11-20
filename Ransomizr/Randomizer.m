@@ -138,4 +138,27 @@ static NSMutableArray *s_fontNames;
     return arc4random_uniform(101) <= percentage;
 }
 
+
+- (UIColor *) getRandomUIColor{
+    // Get 3 random numbers between 0 and 1
+    float red = (arc4random() % 100) / 100.0;
+    float green = (arc4random() % 100) / 100.0;
+    float blue = (arc4random() % 100) / 100.0;
+    
+    UIColor *color;
+    color = [UIColor colorWithRed:red
+                                           green:green
+                                            blue:blue
+                                           alpha:1.0];
+    if (red + green + blue == 0 || red + green + blue == 3) {
+        color = [UIColor yellowColor];
+    }
+    // thanks to https://gist.github.com/kylefox/1689973
+//    CGFloat hue = ( arc4random() % 256 / 256.0 );  //  0.0 to 1.0
+//    CGFloat saturation = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from white
+//    CGFloat brightness = ( arc4random() % 128 / 256.0 ) + 0.5;  //  0.5 to 1.0, away from black
+//    UIColor *color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
+    return color;
+}
+
 @end
