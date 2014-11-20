@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
 @interface Randomizer : NSObject
+
 - ( NSArray *) createRandomPath:(CGRect)outerRect  innerRect:(CGRect) innerRect;
+- (UIFont*)getRandomFontWithMinSize:(CGFloat)min maxSize:(CGFloat)max;
+
 @end
