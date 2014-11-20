@@ -54,4 +54,18 @@ static NSMutableArray *s_fontNames;
     return font;
 }
 
+- (BOOL)randomBool
+{
+    return [self randomBoolWithPercentage:0.5];
+}
+
+- (BOOL)randomBoolWithPercentage:(CGFloat)percentage
+{
+    percentage *= 100.0; //Turn our percent into a number
+    //101 will result in a number between 0 - 100. Our
+    // new percentage number will be used to see if the random
+    // number is less than our equal to the percentage.
+    return arc4random_uniform(101) <= percentage;
+}
+
 @end
