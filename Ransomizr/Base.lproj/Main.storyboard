@@ -21,7 +21,7 @@
                                 <rect key="frame" x="16" y="232" width="568" height="348"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Add ransom note here" translatesAutoresizingMaskIntoConstraints="NO" id="xib-EO-kyK">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Add ransom note here" translatesAutoresizingMaskIntoConstraints="NO" id="xib-EO-kyK">
                                 <rect key="frame" x="39" y="58" width="524" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -39,18 +39,16 @@
                         </subviews>
                         <color key="backgroundColor" red="0.89633576766304346" green="0.89633576766304346" blue="0.89633576766304346" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="zlr-9B-TQv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="1" id="2Uv-DS-FaP"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="zlr-9B-TQv" secondAttribute="bottom" constant="20" id="3k0-tl-CvX"/>
-                            <constraint firstItem="cjK-cR-8qh" firstAttribute="top" secondItem="xib-EO-kyK" secondAttribute="bottom" constant="8" symbolic="YES" id="44L-RI-3SL"/>
-                            <constraint firstItem="xib-EO-kyK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="Pkr-6g-re7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zlr-9B-TQv" secondAttribute="trailing" id="Pve-g9-CjT"/>
-                            <constraint firstItem="cjK-cR-8qh" firstAttribute="trailing" secondItem="xib-EO-kyK" secondAttribute="trailing" id="RBN-BB-Rgf"/>
+                            <constraint firstItem="xib-EO-kyK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="23" id="Q8T-BY-Ub8"/>
                             <constraint firstItem="zlr-9B-TQv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Rbj-Jg-HgP"/>
                             <constraint firstItem="zlr-9B-TQv" firstAttribute="top" secondItem="cjK-cR-8qh" secondAttribute="bottom" constant="8" symbolic="YES" id="RrO-BR-bg8"/>
                             <constraint firstItem="cjK-cR-8qh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="194" id="ZCv-ir-Kmf"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="zlr-9B-TQv" secondAttribute="trailing" constant="-1" id="kdL-9Q-42A"/>
+                            <constraint firstItem="cjK-cR-8qh" firstAttribute="top" secondItem="xib-EO-kyK" secondAttribute="bottom" constant="8" symbolic="YES" id="cbN-bN-wc4"/>
+                            <constraint firstItem="xib-EO-kyK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="38" id="evo-hL-BpQ"/>
+                            <constraint firstItem="xib-EO-kyK" firstAttribute="trailing" secondItem="cjK-cR-8qh" secondAttribute="trailing" id="fFc-Jx-ncX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cjK-cR-8qh" secondAttribute="trailing" constant="21" id="urr-uD-dRO"/>
-                            <constraint firstItem="xib-EO-kyK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="yVp-qE-IEn"/>
                         </constraints>
                     </view>
                 </viewController>
