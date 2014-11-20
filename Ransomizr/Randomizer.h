@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UIKit/UIKit.h>
 @interface Randomizer : NSObject
-
+- ( NSArray *) createRandomPath:(CGRect)outerRect  innerRect:(CGRect) innerRect;
 @end
