@@ -14,6 +14,8 @@
 		9128356A1A1E8AE500BA768B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 912835691A1E8AE500BA768B /* Images.xcassets */; };
 		9128356D1A1E8AE500BA768B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9128356B1A1E8AE500BA768B /* LaunchScreen.xib */; };
 		912835791A1E8AE600BA768B /* RansomizrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 912835781A1E8AE600BA768B /* RansomizrTests.m */; };
+		912835841A1E8BF000BA768B /* Randomizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 912835831A1E8BF000BA768B /* Randomizer.m */; };
+		912835871A1E8C0E00BA768B /* RansomNoteLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 912835861A1E8C0E00BA768B /* RansomNoteLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		912835721A1E8AE600BA768B /* RansomizrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RansomizrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		912835771A1E8AE600BA768B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		912835781A1E8AE600BA768B /* RansomizrTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RansomizrTests.m; sourceTree = "<group>"; };
+		912835821A1E8BF000BA768B /* Randomizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Randomizer.h; sourceTree = "<group>"; };
+		912835831A1E8BF000BA768B /* Randomizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Randomizer.m; sourceTree = "<group>"; };
+		912835851A1E8C0E00BA768B /* RansomNoteLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RansomNoteLayer.h; sourceTree = "<group>"; };
+		912835861A1E8C0E00BA768B /* RansomNoteLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RansomNoteLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +95,10 @@
 				912835691A1E8AE500BA768B /* Images.xcassets */,
 				9128356B1A1E8AE500BA768B /* LaunchScreen.xib */,
 				9128355C1A1E8AE500BA768B /* Supporting Files */,
+				912835821A1E8BF000BA768B /* Randomizer.h */,
+				912835831A1E8BF000BA768B /* Randomizer.m */,
+				912835851A1E8C0E00BA768B /* RansomNoteLayer.h */,
+				912835861A1E8C0E00BA768B /* RansomNoteLayer.m */,
 			);
 			path = Ransomizr;
 			sourceTree = "<group>";
@@ -219,8 +229,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				912835871A1E8C0E00BA768B /* RansomNoteLayer.m in Sources */,
 				912835651A1E8AE500BA768B /* ViewController.m in Sources */,
 				912835621A1E8AE500BA768B /* AppDelegate.m in Sources */,
+				912835841A1E8BF000BA768B /* Randomizer.m in Sources */,
 				9128355F1A1E8AE500BA768B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
