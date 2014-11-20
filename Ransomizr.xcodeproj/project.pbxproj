@@ -16,6 +16,7 @@
 		912835791A1E8AE600BA768B /* RansomizrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 912835781A1E8AE600BA768B /* RansomizrTests.m */; };
 		912835841A1E8BF000BA768B /* Randomizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 912835831A1E8BF000BA768B /* Randomizer.m */; };
 		912835871A1E8C0E00BA768B /* RansomNoteLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 912835861A1E8C0E00BA768B /* RansomNoteLayer.m */; };
+		950F8B021A1E981000768BFA /* RansomNoteRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 950F8B011A1E981000768BFA /* RansomNoteRenderer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		912835831A1E8BF000BA768B /* Randomizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Randomizer.m; sourceTree = "<group>"; };
 		912835851A1E8C0E00BA768B /* RansomNoteLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RansomNoteLayer.h; sourceTree = "<group>"; };
 		912835861A1E8C0E00BA768B /* RansomNoteLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RansomNoteLayer.m; sourceTree = "<group>"; };
+		950F8B001A1E981000768BFA /* RansomNoteRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RansomNoteRenderer.h; sourceTree = "<group>"; };
+		950F8B011A1E981000768BFA /* RansomNoteRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RansomNoteRenderer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +102,8 @@
 				912835831A1E8BF000BA768B /* Randomizer.m */,
 				912835851A1E8C0E00BA768B /* RansomNoteLayer.h */,
 				912835861A1E8C0E00BA768B /* RansomNoteLayer.m */,
+				950F8B001A1E981000768BFA /* RansomNoteRenderer.h */,
+				950F8B011A1E981000768BFA /* RansomNoteRenderer.m */,
 			);
 			path = Ransomizr;
 			sourceTree = "<group>";
@@ -231,6 +236,7 @@
 			files = (
 				912835871A1E8C0E00BA768B /* RansomNoteLayer.m in Sources */,
 				912835651A1E8AE500BA768B /* ViewController.m in Sources */,
+				950F8B021A1E981000768BFA /* RansomNoteRenderer.m in Sources */,
 				912835621A1E8AE500BA768B /* AppDelegate.m in Sources */,
 				912835841A1E8BF000BA768B /* Randomizer.m in Sources */,
 				9128355F1A1E8AE500BA768B /* main.m in Sources */,
@@ -426,6 +432,7 @@
 				9128357E1A1E8AE600BA768B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9128357F1A1E8AE600BA768B /* Build configuration list for PBXNativeTarget "RansomizrTests" */ = {
 			isa = XCConfigurationList;
@@ -434,6 +441,7 @@
 				912835811A1E8AE600BA768B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
