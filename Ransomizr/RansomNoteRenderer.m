@@ -33,26 +33,26 @@
 
 @implementation RansomNoteRenderer
 
-- (id)initWithFrame:(CGRect)frame withCharacters:(NSString *)characters
+- (id)initWithCharacters:(NSString *)characters
 {
-   self = [super initWithFrame:frame];
+   self = [super initWithFrame:CGRectZero];
    if( self!=nil ) {
       self.randomizer = [[Randomizer alloc] init];
       UIFont *font = [self.randomizer getRandomFontWithMinSize:80 maxSize:120];
-      UIColor *color = [UIColor greenColor]; //TODO: Randomize this
+      UIColor *color = [self.randomizer getRandomUIColor];
       NSDictionary *attribs = @{
          NSFontAttributeName: font,
          NSForegroundColorAttributeName: color,
       };
       self.displayString = [[NSAttributedString alloc] initWithString:characters attributes:attribs];
-      self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.displayString.size.width, self.displayString.size.height);
+      self.frame = CGRectMake(0, 0, self.displayString.size.width + 16.f, self.displayString.size.height + 16.f);
    }
    return self;
 }
 
 - (void)drawRect:(CGRect)rect {
 
-   [self.displayString drawInRect:self.bounds];
+   [self.displayString drawAtPoint:CGPointMake(8.f, 8.f)];
 
 /*   CGContextRef ctx = UIGraphicsGetCurrentContext();
    CGRect    bounds = self.bounds;

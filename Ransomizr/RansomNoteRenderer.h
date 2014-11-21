@@ -11,6 +11,6 @@
 
 @interface RansomNoteRenderer : UIView
 
-- (id)initWithFrame:(CGRect)frame withCharacters:(NSString *)characters;
+- (id)initWithCharacters:(NSString *)characters;
 
 @end

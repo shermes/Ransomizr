@@ -12,7 +12,7 @@
 @interface ViewController ()
 
 @property CALayer *ransomNoteLayer;
-@property (nonatomic,strong) RansomNoteRenderer *ransomNoteRenderer;
+@property (nonatomic,strong) NSMutableArray* ransomNoteCharacterViews;
 @property (weak, nonatomic) IBOutlet UICollectionView *ransomNoteCollectionView;
 @property (weak, nonatomic) IBOutlet UITextView *ransomNoteInput;
 
@@ -22,14 +22,26 @@
 
 - (void)viewDidLoad {
    [super viewDidLoad];
+   self.ransomNoteCharacterViews = [[NSMutableArray alloc] init];
    [self.ransomNoteCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"ViewCell"];
       // Do any additional setup after loading the view, typically from a nib.
    [self.ransomNoteCollectionView setDataSource:self];
+   [self.ransomNoteCollectionView setDelegate:self];
 
 }
 - (IBAction)printNote:(UIButton *)sender {
     //change ME
     [self createPDFfromUIView:self.view saveToDocumentsWithFileName:@"test.pdf"];
+}
+
+- (IBAction)ransomize:(id)sender {
+   NSArray *groups = [self.ransomNoteInput.text componentsSeparatedByString:@" "];
+   [self.ransomNoteCharacterViews removeAllObjects];
+   for( NSString *group in groups ) {
+      RansomNoteRenderer *renderer = [[RansomNoteRenderer alloc] initWithCharacters:group];
+      [self.ransomNoteCharacterViews addObject:renderer];
+   }
+   [self.ransomNoteCollectionView reloadData];
 }
 
 -(void)createPDFfromUIView:(UIView*)aView saveToDocumentsWithFileName:(NSString*)aFilename
@@ -61,17 +73,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+   
+   RansomNoteRenderer *renderer = [self.ransomNoteCharacterViews objectAtIndex:indexPath.row];
+   return CGSizeMake(renderer.frame.size.width, renderer.frame.size.height);
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-   return [[self.ransomNoteInput.text componentsSeparatedByString:@" "] count];
+   return [self.ransomNoteCharacterViews count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ViewCell" forIndexPath:indexPath];
-   NSString *word = [[self.ransomNoteInput.text componentsSeparatedByString:@" "] objectAtIndex:indexPath.row];
-   RansomNoteRenderer *rendererView = [[RansomNoteRenderer alloc] initWithFrame:[cell frame] withCharacters:word];
+   [cell.contentView.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
+   RansomNoteRenderer *rendererView = [self.ransomNoteCharacterViews objectAtIndex:indexPath.row];
    [cell.contentView addSubview:rendererView];
-   [cell setFrame:rendererView.frame];
+   CGRect cellFrame = cell.frame;
+   cellFrame.size = rendererView.frame.size;
+   cell.frame = cellFrame;
+   NSLog(@"FRAME: %@", NSStringFromCGRect(rendererView.frame));
+   NSLog(@"CELL FRAME: %@", NSStringFromCGRect(cell.frame));
    return cell;
 }
 
