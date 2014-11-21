@@ -11,7 +11,7 @@
 
 @interface Randomizer : NSObject
 
-- ( NSArray *) createRandomPath:(CGRect)outerRect  innerRect:(CGRect) innerRect;
+- ( NSArray *) createRandomPath:(CGSize)outerRect  innerRect:(CGSize) innerRect;
 /*!
  Gets a random font available on the system of a random size constrained
  between min and max.
