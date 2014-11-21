@@ -28,7 +28,7 @@
 @interface RansomNoteRenderer()
 
 @property (nonatomic,strong) Randomizer *randomizer;
-@property (nonatomic,strong) NSString *characters;
+@property (nonatomic,strong) NSAttributedString *displayString;
 @end
 
 @implementation RansomNoteRenderer
@@ -38,14 +38,23 @@
    self = [super initWithFrame:frame];
    if( self!=nil ) {
       self.randomizer = [[Randomizer alloc] init];
-      self.characters = characters;
+      UIFont *font = [self.randomizer getRandomFontWithMinSize:80 maxSize:120];
+      UIColor *color = [UIColor greenColor]; //TODO: Randomize this
+      NSDictionary *attribs = @{
+         NSFontAttributeName: font,
+         NSForegroundColorAttributeName: color,
+      };
+      self.displayString = [[NSAttributedString alloc] initWithString:characters attributes:attribs];
+      self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.displayString.size.width, self.displayString.size.height);
    }
    return self;
 }
 
 - (void)drawRect:(CGRect)rect {
 
-   CGContextRef ctx = UIGraphicsGetCurrentContext();
+   [self.displayString drawInRect:self.bounds];
+
+/*   CGContextRef ctx = UIGraphicsGetCurrentContext();
    CGRect    bounds = self.bounds;
    UIFont *font = [self.randomizer getRandomFontWithMinSize:80 maxSize:120];
    UIColor *color = [UIColor greenColor]; //TODO: Randomize this
@@ -68,18 +77,18 @@
    NSAttributedString *displayAttrString = [[NSAttributedString alloc] initWithString:self.characters attributes:attribs];
    CGSize strSize = displayAttrString.size;
    CGPoint textPos = CGPointMake(CGRectGetMaxX(bounds) - strSize.width, -(CGRectGetMaxY(bounds)));
-   
-   UIGraphicsPushContext(ctx);
-   CGContextSaveGState(ctx);
-   CGContextScaleCTM(ctx, 1.0, -1.0);
+//   
+//   UIGraphicsPushContext(ctx);
+//   CGContextSaveGState(ctx);
+//   CGContextScaleCTM(ctx, 1.0, -1.0);
    [displayAttrString drawAtPoint:textPos];
-   CGContextRestoreGState(ctx);
-   UIGraphicsPopContext();
+//   CGContextRestoreGState(ctx);
+//   UIGraphicsPopContext();
    
    CGColorRelease(white);
    CGColorRelease(black);
    
-   CGColorSpaceRelease(cs);
+   CGColorSpaceRelease(cs);*/
 }
 
 @end
