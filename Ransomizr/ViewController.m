@@ -13,6 +13,8 @@
 
 @property CALayer *ransomNoteLayer;
 @property (nonatomic,strong) RansomNoteRenderer *ransomNoteRenderer;
+@property (weak, nonatomic) IBOutlet UICollectionView *ransomNoteCollectionView;
+@property (weak, nonatomic) IBOutlet UITextView *ransomNoteInput;
 
 @end
 
@@ -20,15 +22,10 @@
 
 - (void)viewDidLoad {
    [super viewDidLoad];
+   [self.ransomNoteCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"ViewCell"];
       // Do any additional setup after loading the view, typically from a nib.
-   self.ransomNoteRenderer = [[RansomNoteRenderer alloc] init];
-   self.ransomNoteLayer = [CALayer layer];
-   self.ransomNoteLayer.backgroundColor = [UIColor yellowColor].CGColor;
-   self.ransomNoteLayer.geometryFlipped = YES;
-   self.ransomNoteLayer.delegate = self.ransomNoteRenderer;
-   
-      // Put it atop the view
-   [self.view.layer addSublayer:self.ransomNoteLayer];
+   [self.ransomNoteCollectionView setDataSource:self];
+
 }
 - (IBAction)printNote:(UIButton *)sender {
     //change ME
@@ -64,17 +61,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewDidLayoutSubviews
-{
-    CGRect bounds = self.view.bounds;
-    
-    bounds.size.height -= 60; // Leave space for the buttons
-    
-    self.ransomNoteLayer.bounds = bounds;
-    self.ransomNoteLayer.anchorPoint = CGPointZero;
-    self.ransomNoteLayer.position = CGPointZero;
-    [self.ransomNoteLayer setNeedsDisplay];
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+   return [[self.ransomNoteInput.text componentsSeparatedByString:@" "] count];
 }
 
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+   UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ViewCell" forIndexPath:indexPath];
+   NSString *word = [[self.ransomNoteInput.text componentsSeparatedByString:@" "] objectAtIndex:indexPath.row];
+   RansomNoteRenderer *rendererView = [[RansomNoteRenderer alloc] initWithFrame:[cell frame] withCharacters:word];
+   [cell.contentView addSubview:rendererView];
+   [cell setFrame:rendererView.frame];
+   return cell;
+}
 
 @end
