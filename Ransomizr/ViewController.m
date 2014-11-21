@@ -7,16 +7,25 @@
 //
 
 #import "ViewController.h"
+#import "RansomNoteRenderer.h"
 
 @interface ViewController ()
+
+@property CALayer *ransomNoteLayer;
+@property (nonatomic,strong) RansomNoteRenderer *ransomNoteRenderer;
+@property (weak, nonatomic) IBOutlet UICollectionView *ransomNoteCollectionView;
+@property (weak, nonatomic) IBOutlet UITextView *ransomNoteInput;
 
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+   [super viewDidLoad];
+   [self.ransomNoteCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"ViewCell"];
+      // Do any additional setup after loading the view, typically from a nib.
+   [self.ransomNoteCollectionView setDataSource:self];
+
 }
 - (IBAction)printNote:(UIButton *)sender {
     //change ME
@@ -50,6 +59,20 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+   return [[self.ransomNoteInput.text componentsSeparatedByString:@" "] count];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+   UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ViewCell" forIndexPath:indexPath];
+   NSString *word = [[self.ransomNoteInput.text componentsSeparatedByString:@" "] objectAtIndex:indexPath.row];
+   RansomNoteRenderer *rendererView = [[RansomNoteRenderer alloc] initWithFrame:[cell frame] withCharacters:word];
+   [cell.contentView addSubview:rendererView];
+   [cell setFrame:rendererView.frame];
+   return cell;
 }
 
 @end
