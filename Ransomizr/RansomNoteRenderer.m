@@ -7,6 +7,7 @@
 //
 
 #import "RansomNoteRenderer.h"
+#import "Randomizer.h"
 
 
 #define RANGE (700.0f)
@@ -24,22 +25,30 @@
 #define NAME_HEIGHT (95.0f)
 // NAME_HEIGHT is the height of the persons name in points
 
+@interface RansomNoteRenderer()
+
+@property (nonatomic,strong) Randomizer *randomizer;
+@property (nonatomic,strong) NSString *characters;
+@end
 
 @implementation RansomNoteRenderer
 
-- (void)drawInContext:(CGContextRef)ctx bounds:(CGRect)bounds
+- (id)initWithFrame:(CGRect)frame withCharacters:(NSString *)characters
 {
-   NSString *characters = @"A";
-   CGRect characterRect = CGRectMake(40, 40, 120, 120);
-   UIColor *color = [UIColor blueColor];
-   UIFont *font = [UIFont systemFontOfSize:48.f];
-   
-   [self drawCharacters:characters font:font color:color bounds:characterRect context:ctx];
+   self = [super initWithFrame:frame];
+   if( self!=nil ) {
+      self.randomizer = [[Randomizer alloc] init];
+      self.characters = characters;
+   }
+   return self;
 }
 
-- (void)drawCharacters:(NSString *)characters font:(UIFont *)font color:(UIColor *)color bounds:(CGRect)bounds context:(CGContextRef)ctx
-{
-   
+- (void)drawRect:(CGRect)rect {
+
+   CGContextRef ctx = UIGraphicsGetCurrentContext();
+   CGRect    bounds = self.bounds;
+   UIFont *font = [self.randomizer getRandomFontWithMinSize:80 maxSize:120];
+   UIColor *color = [UIColor greenColor]; //TODO: Randomize this
    CGColorSpaceRef cs = CGColorSpaceCreateDeviceRGB();
    
    CGFloat blackRGBA[] = { 0, 0, 0, 1 };
@@ -56,9 +65,9 @@
       NSFontAttributeName: font,
       NSForegroundColorAttributeName: color,
    };
-   NSAttributedString *displayAttrString = [[NSAttributedString alloc] initWithString:characters attributes:attribs];
+   NSAttributedString *displayAttrString = [[NSAttributedString alloc] initWithString:self.characters attributes:attribs];
    CGSize strSize = displayAttrString.size;
-   CGPoint textPos = CGPointMake(CGRectGetMaxX(bounds) - strSize.width, -CGRectGetMaxY(bounds));
+   CGPoint textPos = CGPointMake(CGRectGetMaxX(bounds) - strSize.width, -(CGRectGetMaxY(bounds)));
    
    UIGraphicsPushContext(ctx);
    CGContextSaveGState(ctx);
@@ -71,10 +80,6 @@
    CGColorRelease(black);
    
    CGColorSpaceRelease(cs);
-}
-
-- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx {
-   [self drawInContext:ctx bounds:layer.bounds];
 }
 
 @end

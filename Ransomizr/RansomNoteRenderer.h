@@ -9,12 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface RansomNoteRenderer : NSObject
+@interface RansomNoteRenderer : UIView
 
-// Assumes the context is flipped
-- (void)drawInContext:(CGContextRef)ctx bounds:(CGRect)bounds;
-
-// Just a stub that calls drawInContext:bounds:
-- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx;
+- (id)initWithFrame:(CGRect)frame withCharacters:(NSString *)characters;
 
 @end
