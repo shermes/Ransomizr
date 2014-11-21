@@ -27,42 +27,42 @@ const int MAX_SQUARES = 8;
             case 0:
                 // Left top corner
                 minPoint = CGPointMake(0.0, 0.0);
-                maxPoint = CGPointMake(minPoint.x + gapWidth, minPoint.y + gapHeight);
+                maxPoint = CGPointMake(gapWidth, gapHeight);
                 break;
             case 1:
                 // top center
-                minPoint = CGPointMake(minPoint.x + gapWidth, minPoint.y);
-                maxPoint = CGPointMake(maxPoint.x + innerRect.width, maxPoint.y);
+                minPoint = CGPointMake(gapWidth, 0);
+                maxPoint = CGPointMake(gapWidth + innerRect.width, gapHeight);
                 break;
             case 2:
                 // right top corner
-                minPoint = CGPointMake(minPoint.x + innerRect.width, minPoint.y);
-                maxPoint = CGPointMake(maxPoint.x + gapWidth, maxPoint.y);
+                minPoint = CGPointMake(gapWidth + innerRect.width, 0);
+                maxPoint = CGPointMake(outerRect.width, gapHeight);
                 break;
-            case 3:
+            case 7:
                 // left side middle
                 minPoint = CGPointMake(0, gapHeight);
                 maxPoint = CGPointMake(gapWidth, gapHeight + innerRect.height);
                 break;
-            case 4:
+            case 3:
                 // right side middle
-                minPoint = CGPointMake(gapWidth + innerRect.width, minPoint.y);
-                maxPoint = CGPointMake(outerRect.width, maxPoint.y);
+                minPoint = CGPointMake(gapWidth + innerRect.width, gapHeight);
+                maxPoint = CGPointMake(outerRect.width, gapHeight + innerRect.height);
                 break;
-            case 5:
+            case 6:
                 // left lower corner
                 minPoint = CGPointMake(0, gapHeight + innerRect.height);
                 maxPoint = CGPointMake(gapWidth, outerRect.height);
                 break;
-            case 6:
-                // left lower center
-                minPoint = CGPointMake(minPoint.x + gapWidth, minPoint.y);
-                maxPoint = CGPointMake(maxPoint.x + innerRect.width, maxPoint.y);
+            case 5:
+                // lower center
+                minPoint = CGPointMake(gapWidth, gapHeight + innerRect.height);
+                maxPoint = CGPointMake(gapWidth + innerRect.width, outerRect.height);
                 break;
-            case 7:
-                // left right corner
-                minPoint = CGPointMake(minPoint.x + innerRect.width, minPoint.y);
-                maxPoint = CGPointMake(maxPoint.x + gapWidth, maxPoint.y);
+            case 4:
+                // lower right corner
+                minPoint = CGPointMake(gapWidth + innerRect.width, gapHeight + innerRect.height);
+                maxPoint = CGPointMake(outerRect.width, outerRect.height);
                 break;
                 
             default:

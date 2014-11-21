@@ -35,7 +35,16 @@
 }
 
 - (IBAction)ransomize:(id)sender {
-   NSArray *groups = [self.ransomNoteInput.text componentsSeparatedByString:@" "];
+   NSMutableArray *groups = [NSMutableArray array];
+   // CHARACTERS
+   NSString *str = self.ransomNoteInput.text;
+   for (int i = 0; i < [str length]; i++) {
+       NSString *ch = [str substringWithRange:NSMakeRange(i, 1)];
+       [groups addObject:ch];
+   }
+   // WORDS
+   [groups removeAllObjects];
+   [groups addObjectsFromArray:[self.ransomNoteInput.text componentsSeparatedByString:@" "]];
    [self.ransomNoteCharacterViews removeAllObjects];
    for( NSString *group in groups ) {
       RansomNoteRenderer *renderer = [[RansomNoteRenderer alloc] initWithCharacters:group];
@@ -81,6 +90,10 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
    return [self.ransomNoteCharacterViews count];
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+    return 0.0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath

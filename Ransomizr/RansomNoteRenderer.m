@@ -29,6 +29,9 @@
 
 @property (nonatomic,strong) Randomizer *randomizer;
 @property (nonatomic,strong) NSAttributedString *displayString;
+@property (nonatomic,strong) NSArray *clipPathPoints;
+@property (nonatomic,strong) UIColor *fontColor;
+@property (nonatomic,strong) UIColor *bgColor;
 @end
 
 @implementation RansomNoteRenderer
@@ -38,57 +41,61 @@
    self = [super initWithFrame:CGRectZero];
    if( self!=nil ) {
       self.randomizer = [[Randomizer alloc] init];
-      UIFont *font = [self.randomizer getRandomFontWithMinSize:80 maxSize:120];
-      UIColor *color = [self.randomizer getRandomUIColor];
+      UIFont *font = [self.randomizer getRandomFontWithMinSize:32 maxSize:64];
+      self.fontColor = [self.randomizer getRandomUIColor];
+      self.bgColor = [self.randomizer getRandomUIColor];
       NSDictionary *attribs = @{
          NSFontAttributeName: font,
-         NSForegroundColorAttributeName: color,
+         NSForegroundColorAttributeName: self.fontColor,
       };
+      characters = [characters stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
       self.displayString = [[NSAttributedString alloc] initWithString:characters attributes:attribs];
-      self.frame = CGRectMake(0, 0, self.displayString.size.width + 16.f, self.displayString.size.height + 16.f);
+      
+      self.clipPathPoints = [self.randomizer createRandomPath:[self getRectForPaddedString:self.displayString] innerRect:self.displayString.size];
+      if( self.displayString.length<=0 ) {
+         self.frame = CGRectMake(0, 0, 40.f, self.displayString.size.height + 8.f);
+      } else {
+         self.frame = CGRectMake(0, 0, self.displayString.size.width + 8.f, self.displayString.size.height + 8.f);
+      }
+      self.backgroundColor = [UIColor clearColor];
    }
    return self;
 }
 
 - (void)drawRect:(CGRect)rect {
 
-   [self.displayString drawAtPoint:CGPointMake(8.f, 8.f)];
+   if( self.displayString.length>0 ) {
+      CGContextRef ctx = UIGraphicsGetCurrentContext();
+      UIGraphicsPushContext(ctx);
+      CGContextSetFillColorWithColor(ctx, self.bgColor.CGColor);
+      // CLIP
+      CGContextSaveGState(ctx);
+      CGMutablePathRef clipPath = CGPathCreateMutable();
+      CGPathMoveToPoint(clipPath, nil, [self.clipPathPoints[0] CGPointValue].x, [self.clipPathPoints[0] CGPointValue].y);
+      for( int k = 1; k < self.clipPathPoints.count; k++) {
+         CGPathAddLineToPoint(clipPath, nil, [self.clipPathPoints[k] CGPointValue].x, [self.clipPathPoints[k] CGPointValue].y);
+      }
+      CGPathMoveToPoint(clipPath, nil, [self.clipPathPoints[0] CGPointValue].x, [self.clipPathPoints[0] CGPointValue].y);
+      CGContextAddPath(ctx, clipPath);
+      CGContextClip(ctx);
+      CGContextFillPath(ctx);
+      CGContextFillRect(ctx, self.bounds);
+      [self.displayString drawAtPoint:CGPointMake(4.f, 2.f)];
+      CGContextRestoreGState(ctx);
 
-/*   CGContextRef ctx = UIGraphicsGetCurrentContext();
-   CGRect    bounds = self.bounds;
-   UIFont *font = [self.randomizer getRandomFontWithMinSize:80 maxSize:120];
-   UIColor *color = [UIColor greenColor]; //TODO: Randomize this
-   CGColorSpaceRef cs = CGColorSpaceCreateDeviceRGB();
-   
-   CGFloat blackRGBA[] = { 0, 0, 0, 1 };
-   CGColorRef black = CGColorCreate(cs, blackRGBA);
-   CGFloat whiteRGBA[] = { 1, 1, 1, 1 };
-   CGColorRef white = CGColorCreate(cs, whiteRGBA);
-   
-   CGContextSetStrokeColorWithColor(ctx, black);
-   CGContextSetLineWidth(ctx, 1);
-   
-   CGContextSetFillColorWithColor(ctx, white);
-   
-   NSDictionary *attribs = @{
-      NSFontAttributeName: font,
-      NSForegroundColorAttributeName: color,
-   };
-   NSAttributedString *displayAttrString = [[NSAttributedString alloc] initWithString:self.characters attributes:attribs];
-   CGSize strSize = displayAttrString.size;
-   CGPoint textPos = CGPointMake(CGRectGetMaxX(bounds) - strSize.width, -(CGRectGetMaxY(bounds)));
-//   
-//   UIGraphicsPushContext(ctx);
-//   CGContextSaveGState(ctx);
-//   CGContextScaleCTM(ctx, 1.0, -1.0);
-   [displayAttrString drawAtPoint:textPos];
-//   CGContextRestoreGState(ctx);
-//   UIGraphicsPopContext();
-   
-   CGColorRelease(white);
-   CGColorRelease(black);
-   
-   CGColorSpaceRelease(cs);*/
+      // STRING
+      CGContextSaveGState(ctx);
+      CGContextScaleCTM(ctx, 1.0, -1.0);
+      CGContextRestoreGState(ctx);
+      
+      UIGraphicsPopContext();
+   }
+}
+
+- (CGSize)getRectForPaddedString:(NSAttributedString *)str {
+
+   CGSize stringSize = str.size;
+   return CGSizeMake( stringSize.width + 24.f, stringSize.height + 32.f);
 }
 
 @end
