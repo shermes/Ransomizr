@@ -92,8 +92,6 @@
    CGRect cellFrame = cell.frame;
    cellFrame.size = rendererView.frame.size;
    cell.frame = cellFrame;
-   NSLog(@"FRAME: %@", NSStringFromCGRect(rendererView.frame));
-   NSLog(@"CELL FRAME: %@", NSStringFromCGRect(cell.frame));
    return cell;
 }
 
